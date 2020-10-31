@@ -1,5 +1,6 @@
 import pygame
 
+pygame.init()
 # Set the width and the height of the window
 (width, height) = (300, 300)
 # movement in pixels
@@ -23,13 +24,13 @@ obs_rect.y = 270
 # Background image
 background = pygame.image.load(r'/Users/txt-17/PycharmProjects/PyGame/sky_balloons/sprites/sky.png')
 
-block = pygame.Rect(200, 100, 80, 80)
-
 
 # Game Loop
 def game_loop():
     # Boolean to see if game is running
     running = True
+    # keep track of game over
+    game_over = False
 
     while running:
         for event in pygame.event.get():
@@ -66,4 +67,3 @@ def game_loop():
 
 game_loop()
 pygame.quit()
-
