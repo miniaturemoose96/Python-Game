@@ -1,5 +1,8 @@
 import pygame
+import sys
 
+pygame.init()
+BLACK = (0, 0, 0)
 # Set the width and the height of the window
 (width, height) = (300, 300)
 # movement in pixels
@@ -26,10 +29,42 @@ background = pygame.image.load(r'/Users/txt-17/PycharmProjects/PyGame/sky_balloo
 block = pygame.Rect(200, 100, 80, 80)
 
 
+def draw_text(text, font, color, surface, x, y):
+    textobj = font.render(text, 1, color)
+    textrect = textobj.get_rect()
+    textrect.topleft = (x, y)
+    surface.blit(textobj, textrect)
+
+
+def text_objects(text, font):
+    textSurface = font.render(text, True, (255, 0, 0))
+    return textSurface, textSurface.get_rect()
+
+
+def end_game_screen():
+    intro = True
+    while intro:
+        for event in pygame.event.get():
+            key = pygame.key.get_pressed()
+            if key[pygame.K_DOWN]:
+                game_loop()
+            # terminate game on exit
+            if event.type == pygame.QUIT:
+                sys.exit()
+        screen.fill(BLACK)
+        largeText = pygame.font.Font('freesansbold.ttf', 20)
+        TextSurf, TextRect = text_objects('GAME OVER', largeText)
+        TextRect.center = ((width/ 2), ( height/ 2))
+        screen.blit(TextSurf, TextRect)
+        pygame.display.update()
+
+
 # Game Loop
 def game_loop():
     # Boolean to see if game is running
     running = True
+    # check for game over
+    game_over = False
 
     while running:
         for event in pygame.event.get():
@@ -57,7 +92,7 @@ def game_loop():
         if player_rect.colliderect(obs_rect):
             print('hit- game over')
             pygame.draw.rect(screen, (255, 0, 0), player_rect, 4)
-            running = False
+            end_game_screen()
 
         # flip will allow us to display the graphics and allow us to see the change
         pygame.display.flip()
