@@ -89,6 +89,9 @@ def game_loop():
         # call collide method here
         # checking for collision with obstacle in this case game over
         # to make it visible i will show the red box around our balloon
+        # call collide method here
+        # checking for collision with obstacle in this case game over
+        # to make it visible i will show the red box around our balloon
         if player_rect.colliderect(obs_rect):
             print('hit- game over')
             pygame.draw.rect(screen, (255, 0, 0), player_rect, 4)
