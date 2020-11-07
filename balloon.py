@@ -87,6 +87,7 @@ def game_loop():
             img_y = 0
 
         # flip will allow us to display the graphics and allow us to see the change
+        
         pygame.display.flip()
         clock.tick(60)
 
